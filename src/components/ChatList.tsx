@@ -34,20 +34,20 @@ export default function ChatList() {
             </div>
             <button onClick={() => { setShowMenu(false); }} className="w-full flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-hover)]">
               <UserIcon size={20} color="var(--text-secondary)" />
-              <span style={{ color: 'var(--text-primary)' }}>Профиль</span>
+              <span style={{ color: 'var(--text-primary)' }}>Profile</span>
             </button>
             <button onClick={() => { toggleTheme(); setShowMenu(false); }} className="w-full flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-hover)]">
               {theme === 'dark' ? <SunIcon size={20} color="var(--text-secondary)" /> : <MoonIcon size={20} color="var(--text-secondary)" />}
-              <span style={{ color: 'var(--text-primary)' }}>{theme === 'dark' ? 'Светлая' : 'Тёмная'} тема</span>
+              <span style={{ color: 'var(--text-primary)' }}>{theme === 'dark' ? 'Light' : 'Dark'} Theme</span>
             </button>
             <button onClick={() => { setShowMenu(false); }} className="w-full flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-hover)]">
               <SettingsIcon size={20} color="var(--text-secondary)" />
-              <span style={{ color: 'var(--text-primary)' }}>Настройки</span>
+              <span style={{ color: 'var(--text-primary)' }}>Settings</span>
             </button>
             <div className="h-px" style={{ background: 'var(--divider)' }} />
             <button onClick={logout} className="w-full flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-hover)]">
               <LogoutIcon size={20} color="#e53935" />
-              <span style={{ color: '#e53935' }}>Выйти</span>
+              <span style={{ color: '#e53935' }}>Logout</span>
             </button>
           </div>
         </>
@@ -59,7 +59,7 @@ export default function ChatList() {
           <input
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Поиск"
+            placeholder="Search"
             className="flex-1 bg-transparent text-sm outline-none"
             style={{ color: 'var(--text-primary)' }}
           />
@@ -90,7 +90,7 @@ export default function ChatList() {
               <div className="flex-1 min-w-0 text-left">
                 <p className="font-semibold truncate" style={{ color: isActive ? 'white' : 'var(--text-primary)' }}>{chat.name}</p>
                 <p className="text-sm truncate" style={{ color: isActive ? 'rgba(255,255,255,0.8)' : 'var(--text-secondary)' }}>
-                  {chat.lastMessage?.text || 'Нет сообщений'}
+                  {chat.lastMessage?.text || 'No messages'}
                 </p>
               </div>
               {chat.lastMessage && (

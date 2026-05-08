@@ -1,10 +1,29 @@
-const API_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:8080/api' 
-  : 'https://chillgram-production.up.railway.app/api';
+const getAPIUrl = () => {
+  if (typeof window === 'undefined') return '';
+  const hostname = window.location.hostname;
+  
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://localhost:8080/api';
+  }
+  
+  // For Railway or production
+  return window.location.origin.replace(/:\d+/, ':8080') + '/api';
+};
 
-const WS_URL = window.location.hostname === 'localhost'
-  ? 'ws://localhost:8080'
-  : 'wss://chillgram-production.up.railway.app';
+const getWSUrl = () => {
+  if (typeof window === 'undefined') return '';
+  const hostname = window.location.hostname;
+  
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'ws://localhost:8080';
+  }
+  
+  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  return protocol + '//' + window.location.host.replace(/:\d+/, ':8080');
+};
+
+const API_URL = getAPIUrl();
+const WS_URL = getWSUrl();
 
 let ws: WebSocket | null = null;
 let reconnectTimer: NodeJS.Timeout | null = null;

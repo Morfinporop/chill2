@@ -42,7 +42,7 @@ export default function ChatWindow() {
     return (
       <div className="h-full flex items-center justify-center chat-bg-pattern">
         <div className="text-center">
-          <p className="text-xl" style={{ color: 'var(--text-secondary)' }}>Выберите чат</p>
+          <p className="text-xl" style={{ color: 'var(--text-secondary)' }}>Select a chat</p>
         </div>
       </div>
     );
@@ -67,7 +67,7 @@ export default function ChatWindow() {
         <div className="flex-1">
           <p className="text-white font-semibold">{chat.name}</p>
           <p className="text-white/70 text-xs">
-            {isTyping > 0 ? 'печатает...' : otherUser?.online ? 'онлайн' : 'оффлайн'}
+            {isTyping > 0 ? 'typing...' : otherUser?.online ? 'online' : 'offline'}
           </p>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function ChatWindow() {
           value={input}
           onChange={e => handleTyping(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleSend()}
-          placeholder="Сообщение..."
+          placeholder="Message"
           className="flex-1 px-4 py-2 rounded-full text-sm outline-none"
           style={{ background: 'var(--search-bg)', color: 'var(--text-primary)' }}
         />

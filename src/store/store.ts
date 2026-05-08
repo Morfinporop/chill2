@@ -177,7 +177,7 @@ export const useStore = create<AppState>((set, get) => ({
     // Update will come through WebSocket
   },
 
-  theme: (localStorage.getItem('theme') as 'light' | 'dark') || 'dark',
+  theme: (localStorage.getItem('theme') as 'light' | 'dark') || 'light',
   toggleTheme: () => {
     const newTheme = get().theme === 'dark' ? 'light' : 'dark';
     localStorage.setItem('theme', newTheme);
