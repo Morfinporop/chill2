@@ -406,11 +406,7 @@ export default function Login() {
                 onKeyDown={e => e.key === 'Enter' && handlePhoneSubmit()}
               />
             </div>
-            {country && (
-              <p className="text-xs mb-3" style={{ color: 'var(--text-secondary)' }}>
-                {country.name}
-              </p>
-            )}
+
             {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
             <button
               onClick={handlePhoneSubmit}

@@ -1,35 +1,10 @@
-const getAPIUrl = () => {
-  if (typeof window === 'undefined') return '';
-  const hostname = window.location.hostname;
-  
-  if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'http://localhost:8080/api';
-  }
-  
-  // For Railway production
-  if (hostname.includes('railway.app')) {
-    // Use the same domain, Railway proxies to 8080
-    return window.location.origin + '/api';
-  }
-  
-  return window.location.origin + '/api';
-};
+const API_URL = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+  ? 'http://localhost:8080/api'
+  : '/api';
 
-const getWSUrl = () => {
-  if (typeof window === 'undefined') return '';
-  const hostname = window.location.hostname;
-  
-  if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'ws://localhost:8080';
-  }
-  
-  // For Railway - use same domain with wss
-  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  return protocol + '//' + window.location.host;
-};
-
-const API_URL = getAPIUrl();
-const WS_URL = getWSUrl();
+const WS_URL = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+  ? 'ws://localhost:8080'
+  : (typeof window !== 'undefined' ? (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host : '');
 
 let ws: WebSocket | null = null;
 let reconnectTimer: NodeJS.Timeout | null = null;
