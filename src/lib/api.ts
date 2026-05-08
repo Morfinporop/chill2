@@ -6,8 +6,13 @@ const getAPIUrl = () => {
     return 'http://localhost:8080/api';
   }
   
-  // For Railway or production
-  return window.location.origin.replace(/:\d+/, ':8080') + '/api';
+  // For Railway production
+  if (hostname.includes('railway.app')) {
+    // Use the same domain, Railway proxies to 8080
+    return window.location.origin + '/api';
+  }
+  
+  return window.location.origin + '/api';
 };
 
 const getWSUrl = () => {
@@ -18,8 +23,9 @@ const getWSUrl = () => {
     return 'ws://localhost:8080';
   }
   
+  // For Railway - use same domain with wss
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  return protocol + '//' + window.location.host.replace(/:\d+/, ':8080');
+  return protocol + '//' + window.location.host;
 };
 
 const API_URL = getAPIUrl();
